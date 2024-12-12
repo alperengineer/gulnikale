@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Güllüme</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: #f6e7fa;
+            color: #ffffff;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .container {
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin: 0;
+            color: red;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .firework {
+            position: relative;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, #fff, #ff6f61);
+            border-radius: 50%;
+            animation: explode 1.5s ease-out forwards;
+            pointer-events: none;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes explode {
+            0% {
+                transform: scale(0.5);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(2);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(3);
+                opacity: 0;
+            }
+        }
+
+        .rose {
+            position: absolute;
+            bottom: 10%;
+            display: flexbox;
+            animation: bloom 3s ease-in forwards;
+        }
+
+        .rose img {
+            width: 150px;
+            height: auto;
+        }
+
+        @keyframes bloom {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>İyi ki Doğdun GÜLNİHAL:)</h1>
+    </div>
+    <div id="fireworks"></div>
+    <div class="rose" id="rose">
+        <img src="https://media.giphy.com/media/3o6gDRzatZMftmG2QM/giphy.gif?cid=790b76112zgioubea43g7ay3rqrekdq2hzpupjodlz75fice&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="Rose">
+    </div>
+    <div class="rose" id="rose">
+        <img src="https://media.giphy.com/media/3o6gDRzatZMftmG2QM/giphy.gif?cid=790b76112zgioubea43g7ay3rqrekdq2hzpupjodlz75fice&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="Rose">
+    </div>
+    <div class="rose" id="rose">
+        <img src="https://media.giphy.com/media/3o6gDRzatZMftmG2QM/giphy.gif?cid=790b76112zgioubea43g7ay3rqrekdq2hzpupjodlz75fice&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="Rose">
+    </div>
+
+    <script>
+        const fireworkContainer = document.getElementById('fireworks');
+        const rose = document.getElementById('rose');
+
+        function createFirework(x, y) {
+            const firework = document.createElement('div');
+            firework.className = 'firework';
+            firework.style.left = `${x}px`;
+            firework.style.top = `${y}px`;
+            fireworkContainer.appendChild(firework);
+
+            setTimeout(() => {
+                firework.remove();
+            }, 1500);
+        }
+
+        function launchFireworks() {
+            const interval = setInterval(() => {
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight / 2;
+                createFirework(x, y);
+            }, 300);
+
+            setTimeout(() => {
+                clearInterval(interval);
+                showRose();
+            }, 5000);
+        }
+
+        function showRose() {
+            rose.style.display = 'block';
+        }
+
+        launchFireworks();
+    </script>
+</body>
+</html>
